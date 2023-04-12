@@ -6,12 +6,16 @@
 //
 
 import UIKit
-
+//C : compact küçük
+// Regular: Büyük R 
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var locationsCollectionView: UICollectionView!
     @IBOutlet weak var characterCollectionView: UICollectionView!
+    
+    
+    
     
     
     var locations: [Location] = [
@@ -64,13 +68,13 @@ class HomeViewController: UIViewController {
                   , location: Location(id: 3, name: "Abadonga", type: "1", dimension: "1", residents: "1", url: "1", created: "1")
                   , image: "https://picsum.photos/100/223", episode: ["1","2"], url: "https://picsum.photos/100/223", created: "deneme"),
         
-    
     ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
+        
+        
     }
     
     
@@ -88,7 +92,6 @@ class HomeViewController: UIViewController {
 
 
 extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -132,10 +135,14 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
         }
     }
     
-    
-    
-    
-    
-    
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == characterCollectionView {
+            print("girdi..")
+            let controller = CharacterDetailViewController.instantiate()
+            controller.character = collectionView == characterCollectionView ? charachter[indexPath.row] : nil
+            navigationController?.pushViewController(controller, animated: true )
+        }
+      
+    }
 }

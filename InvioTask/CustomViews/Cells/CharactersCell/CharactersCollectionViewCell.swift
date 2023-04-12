@@ -10,7 +10,6 @@ import Kingfisher
 
 class CharactersCollectionViewCell: UICollectionViewCell {
     
-    
     static let identifier = String(describing: CharactersCollectionViewCell.self)
     
     @IBOutlet weak var characterImageView: UIImageView!
@@ -20,6 +19,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
         
         layer.cornerRadius = 10
