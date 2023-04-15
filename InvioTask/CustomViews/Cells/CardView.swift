@@ -21,14 +21,20 @@ class CardView: UIView {
         initialSetup()
     }
     
+    
+    
     private func initialSetup() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
         layer.cornerRadius = 10
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 10
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 2
+        if traitCollection.userInterfaceStyle == .dark {
+            layer.borderColor = UIColor.white.cgColor
+        } else {
+            layer.borderColor = UIColor.black.cgColor
+        }
     }
     
     

@@ -17,17 +17,19 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var characterGender: UILabel!
     @IBOutlet weak var isAliveLabel: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // Initialization code
         
         layer.cornerRadius = 10
         layer.borderWidth = 2
+        layer.borderColor = UIColor(named: "green")?.cgColor
         let maskLayer = CAShapeLayer()
         let maskPath = UIBezierPath(roundedRect: characterImageView.bounds, byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
     
         maskLayer.path = maskPath.cgPath
+        
     }
     
     

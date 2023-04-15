@@ -18,7 +18,7 @@ extension UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(identifier: identifier) as! Self
         return controller
-        
+
     }
     
     

@@ -6,46 +6,52 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CharacterDetailViewController: UIViewController {
-
-  
-    @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
     
     var character: Character!
-   
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var specyLabel: UILabel!
+    @IBOutlet weak var genderLabel: UILabel!
+    @IBOutlet weak var originLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var episodesLabel: UILabel!
+    @IBOutlet weak var createAtLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
-    
-        if UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height {
-            
-            imageViewBottomConstraint.constant = -250
-        } 
+        
+        setupCharacterDetail()
+        
+        
+        
         
     }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-
-        if UIDevice.current.orientation.isLandscape {
-            imageViewBottomConstraint.constant = -250
-        } else {
-            imageViewBottomConstraint.constant = 50
-        }
+    
+    private func setupCharacterDetail() {
+        
+        self.title = character.name
+        imageView.kf.setImage(with: character.image.asUrl)
+        statusLabel.text = character.name
+        specyLabel.text = character.species
+        genderLabel.text = character.gender
+        //originLabel.text = character.origin)
+        //locationLabel.text =
+       // episodesLabel.text = character.episode
+        createAtLabel.text = character.created
+        
         
     }
-
-
     
-    /*
-    // MARK: - Navigation
+    
+    
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
+
+  
 
 }

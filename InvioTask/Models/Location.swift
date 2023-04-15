@@ -8,16 +8,23 @@
 import Foundation
 
 
-struct Location {
+struct Location : Decodable, Equatable{
+    
+    //name is locationName
 
     let id: Int
     let name: String
     let type: String
     let dimension: String
-    let residents: String
+    let residents: String //array olacak
     let url: String
     let created: String
-
+    
+    
+    static func ==(lhs: Location, rhs: Location) -> Bool {
+         return lhs.id == rhs.id && lhs.name == rhs.name
+     }
+    
 
 }
 
