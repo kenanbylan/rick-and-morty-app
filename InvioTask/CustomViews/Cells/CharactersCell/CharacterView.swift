@@ -1,15 +1,15 @@
 //
-//  CardView.swift
+//  CharacterView.swift
 //  InvioTask
 //
-//  Created by Kenan Baylan on 10.04.2023.
+//  Created by Kenan Baylan on 16.04.2023.
 //
 
 import Foundation
 import UIKit
 
 
-class CardView: UIView {
+class CharacterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +28,11 @@ class CardView: UIView {
         layer.shadowOffset = .zero
         layer.cornerRadius = 10
         layer.shadowOpacity = 0.2
-        layer.shadowRadius = 10
-        layer.borderWidth = 0.5
+        layer.shadowRadius = 2
         if traitCollection.userInterfaceStyle == .dark {
             layer.borderColor = UIColor.white.cgColor
         } else {
-            layer.borderColor = UIColor.white.cgColor
+            layer.borderColor = UIColor.black.cgColor
         }
     }
     
@@ -41,3 +40,4 @@ class CardView: UIView {
     
     
 }
+

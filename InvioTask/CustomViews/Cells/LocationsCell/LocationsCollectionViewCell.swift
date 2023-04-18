@@ -8,10 +8,8 @@
 import UIKit
 
 class LocationsCollectionViewCell: UICollectionViewCell {
-
+    
     static let identifier = String(describing: LocationsCollectionViewCell.self)
-    
-    
     @IBOutlet weak var locationLabel: UILabel!
     
     
@@ -21,13 +19,11 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         
         if traitCollection.userInterfaceStyle == .dark {
             locationLabel.textColor = .white
-            locationLabel.layer.borderColor = UIColor.red.cgColor
+            
         } else {
             locationLabel.textColor = .black
         }
-        
     }
-    
     
     func setupLocations(locations: Location) {
         locationLabel.text = locations.name
@@ -35,5 +31,5 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     
     
     
-   
+    
 }

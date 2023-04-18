@@ -8,20 +8,27 @@
 import Foundation
 
 
+
 enum HomeEndpoint: String {
     
+    case getLocations = "/location?page=1"
+    case getCharacters = "/character"
+    case getCharactersById = "/character/" //farkı array gelecektir yanınaç
     
-    case locations = "location?page=1"
-    case characters = "characters"
-    
+    //https://rickandmortyapi.com/api/location?page=1
     
     var path: String {
         switch self {
             
-        case .locations:
-            return NetworkHelper.shared.requestUrl(url: HomeEndpoint.locations.rawValue)
-        case .characters:
-            return NetworkHelper.shared.requestUrl(url: HomeEndpoint.characters.rawValue)
+        case .getLocations:
+            return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getLocations.rawValue)
+            
+        case .getCharacters:
+            return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getCharacters.rawValue)
+            
+            
+        case .getCharactersById:
+            return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getCharactersById.rawValue)
         }
         
     }

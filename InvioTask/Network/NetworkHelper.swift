@@ -16,10 +16,9 @@ class NetworkHelper {
     private let imageBasePath = "https://image.tmdb.org/t/p/original/" //örnek resim.
     
     
-    let location = String("location")
-    
+    //https://rickandmortyapi.com/api/location
     func requestUrl(url: String) -> String {
-        baseURL + url + "/api=\(location)"
+        baseURL + "/api\(url)"
     }
     
     func getImagePath(url: String) -> String {

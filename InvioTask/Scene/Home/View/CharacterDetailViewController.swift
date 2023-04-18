@@ -27,9 +27,6 @@ class CharacterDetailViewController: UIViewController {
         
         setupCharacterDetail()
         
-        
-        
-        
     }
     
     private func setupCharacterDetail() {
@@ -39,9 +36,9 @@ class CharacterDetailViewController: UIViewController {
         statusLabel.text = character.name
         specyLabel.text = character.species
         genderLabel.text = character.gender
-        //originLabel.text = character.origin)
-        //locationLabel.text =
-       // episodesLabel.text = character.episode
+        originLabel.text = character.origin.name
+        locationLabel.text = character.location.name
+        episodesLabel.text = "1,2,3,4,6,7,8,9"   //MARK: Düzenlenecektir.
         createAtLabel.text = character.created
         
         
