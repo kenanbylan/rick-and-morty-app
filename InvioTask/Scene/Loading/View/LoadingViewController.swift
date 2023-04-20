@@ -11,7 +11,7 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-
+    
     
     //MARK: Variables
     private let isUserLogin = true
@@ -42,7 +42,7 @@ class LoadingViewController: UIViewController {
     
     private func setupAnimationView() {
         
-      
+        
     }
     
     
@@ -50,16 +50,19 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-                delay(durationInSeconds: 2.0) {
-                    //    self.animationView.stop()
-                    self.showHomeView()
-                }
+        delay(durationInSeconds: 2.0) {
+            //    self.animationView.stop()
+            self.showHomeView()
+        }
     }
     
     
     private func showHomeView() {
         if isUserLogin {
             performSegue(withIdentifier: "toHomeNC", sender: nil)
+            
+           // let navigationController = UINavigationController(rootViewController: HomeViewController())
+           // present(navigationController, animated: true, completion: nil)
             
         } else {
             

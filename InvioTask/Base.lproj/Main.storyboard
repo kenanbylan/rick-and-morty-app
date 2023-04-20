@@ -42,7 +42,7 @@
                                                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0jN-UT-cVs" customClass="LocationsCollectionViewCell" customModule="InvioTask" customModuleProvider="target">
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LocationsCollectionViewCell" id="0jN-UT-cVs" customClass="LocationsCollectionViewCell" customModule="InvioTask" customModuleProvider="target">
                                                                 <rect key="frame" x="10" y="0.0" width="128" height="80"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vHm-Ke-KgD">
@@ -81,7 +81,7 @@
                                                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                                         </collectionViewFlowLayout>
                                                         <cells>
-                                                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="pjS-Kk-zbu" customClass="CharactersCollectionViewCell" customModule="InvioTask" customModuleProvider="target">
+                                                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CharactersCollectionViewCell" id="pjS-Kk-zbu" customClass="CharactersCollectionViewCell" customModule="InvioTask" customModuleProvider="target">
                                                                 <rect key="frame" x="10" y="10" width="127.99999999999997" height="128"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="2ei-6v-x3f">
@@ -341,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjW-29-MIb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4923" y="-155"/>
+            <point key="canvasLocation" x="4903" y="-139"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="oK7-33-zpd">
@@ -384,6 +384,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="g8o-GX-m4b" id="FDg-jr-n9B"/>
                         <outlet property="loadingIndicator" destination="Ptz-7t-7Xu" id="XiX-Jd-9a2"/>
                         <outlet property="welcomeLabel" destination="vzo-cK-phK" id="DfR-De-pY6"/>
                         <segue destination="e2n-JM-aPg" kind="presentation" identifier="toHomeNC" modalPresentationStyle="fullScreen" id="698-wt-NME"/>

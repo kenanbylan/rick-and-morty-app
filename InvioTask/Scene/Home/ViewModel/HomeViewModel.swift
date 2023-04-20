@@ -3,19 +3,17 @@
 //  Created by Kenan Baylan on 17.04.2023.
 
 
-
-
 //result.location.url= bu kısımdaki urlin en sonundaki değerleri alıp ayrı bir dizide tutacağız.
 //result.name
 
 
 import Foundation
 import UIKit
-
+import Alamofire
 
 class HomeViewModel {
     
-    let homeViewController = HomeViewController()
+    static let shared = HomeViewModel()
     
     var coordinator: HomeCoordinator?
     let networkManager = HomeManager.shared
@@ -24,17 +22,19 @@ class HomeViewModel {
     var locationsData = [Location]()
     var charactersData = [Character]() // buradaki değişiklik yapıldı
     
-    
     //tıklanan location objesi.
     var locationClicked: Location?
-    
     
     var errorCallback: ((String)->())?
     var successCallback: (()->())?
     
+    
+    var getCharactersId: String?
+    
+    
     func getLocationItems() {
+        
         networkManager.getLocations { locations, error in
-            
             
             if let error = error {
                 print("Hata oluştu: \(error.localizedDescription)")
@@ -62,68 +62,56 @@ class HomeViewModel {
                     self.charactersData = character.results
                 }
             }
+            self.successCallback?()
         }
     }
     
     
-    //Karakter idleri alınıp return olarak bir string döndürülür.
-    func getCharacterId() -> String? {  //tıklandığı zaman çalıştırılması gereken bir fonksiyondur.
-        
-        // `viewModel.locationClicked` içindeki karakter URL'lerini alın
-        guard let characterURLs = locationClicked?.residents else { print("hata verdi222.");  return  nil }
-        
-        // Karakter URL'lerini bir diziye dönüştürün ve karakter ID'lerini elde edin
-        let characterIDs = characterURLs.compactMap { url -> Int? in
-            // URL'yi bölüp karakter ID'sini alın
-            let components = url.split(separator: "/")
-            return Int(components.last ?? "")
-        }
-        
-        // Karakter ID'lerini virgülle ayrılmış bir string olarak birleştirin
-        let characterIDString = characterIDs.map { String($0) }.joined(separator: ",")
-        return characterIDString
-    }
     
-
-    func getCharactersById() {
+    func getCharacterItemsById()  {
         
-        networkManager.getCharactersById { charactersById, error in
+        print("getCharactersId :" , getCharactersId)
+        
+        
+        networkManager.getCharactersById(characterIds: getCharactersId ?? "31,2,3,4") { character, error in
+            
             if let error = error {
-                print("Hata oluştu getCharacterItems : \(error.localizedDescription)")
+                print("Hata oluştu getCharacterItems : \(error)")
                 self.errorCallback?(error.localizedDescription)
                 
             } else {
-                
-                if let charactersById = charactersById {
-                    //print("Characterss ViewModel : ", character.results[0])
-                    self.charactersData = charactersById.results
+                if let character = character {
+                    print(" getCharacterItemsById results : ",   character)
+                    self.charactersData = character
                 }
             }
+            self.successCallback?()
+            
         }
     }
     
     
     func loadNextPage() {
-        // loading hücresi koleksiyon görünümüne
         
-        homeViewController.isLoading = true
-        homeViewController.locationsCollectionView.reloadData()
-
+        // loading hücresi koleksiyon görünümüne
+        //  homeViewController.isLoading = true
+        //  homeViewController.locationsCollectionView.reloadData()
+        
         //API isteği yapın
-        APIManager.shared.getLocations(page: self.page) { result in
-            switch result {
-            case .success(let locations):
-                self.page += 1
-                // Verileri koleksiyon görünümüne ekleme
-                self.locations.append(contentsOf: locations)
-                // loading hücresini koleksiyondan kaldırın
-                self.isLoading = false
-                self.collectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+        //        APIManager.shared.getLocations(page: self.page) { result in
+        //            switch result {
+        //            case .success(let locations):
+        //                self.page += 1
+        //                // Verileri koleksiyon görünümüne ekleme
+        //                self.locations.append(contentsOf: locations)
+        //                // loading hücresini koleksiyondan kaldırın
+        //                self.isLoading = false
+        //                self.collectionView.reloadData()
+        //            case .failure(let error):
+        //                print(error)
+        //            }
+        //        }
     }
-
+    
     
 }

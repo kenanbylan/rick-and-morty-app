@@ -14,6 +14,8 @@ struct NetworkService {
     static let shared = NetworkService()
     private init() {}
     
+    
+    
     func request<T: Codable>(type: T.Type,
                              url: String,
                              method: HTTPMethod,

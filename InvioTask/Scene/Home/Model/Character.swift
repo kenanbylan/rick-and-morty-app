@@ -11,6 +11,12 @@ struct CharacterResponse: Codable {
 
 
 
+struct CharacterResponseById : Codable {
+    let results: [Character]
+    
+}
+
+
 struct Character: Codable {
     
     let id: Int

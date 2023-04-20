@@ -26,7 +26,6 @@ enum HomeEndpoint: String {
         case .getCharacters:
             return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getCharacters.rawValue)
             
-            
         case .getCharactersById:
             return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getCharactersById.rawValue)
         }

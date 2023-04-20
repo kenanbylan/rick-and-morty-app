@@ -5,20 +5,19 @@
 //  Created by Kenan Baylan on 10.04.2023.
 
 
-
-
-
 import UIKit
 import ProgressHUD
 
 //C: compact küçük.
 //R: regular büyük.
 
+
+
 class HomeViewController: UIViewController {
     
     static let shared = HomeViewController()
-    
     let viewModel = HomeViewModel()
+    
     
     //MARK: UIElements
     @IBOutlet weak var headerImageView: UIImageView!
@@ -28,7 +27,7 @@ class HomeViewController: UIViewController {
     
     //MARK: Variables
     var selectedIndexPath: IndexPath? // Seçili hücrenin indeksi
-    let selectedLabelColor = UIColor(named: "green") // Seçili hücrenin label rengi
+    let selectedLabelColor = UIColor.systemGreen // Seçili hücrenin label rengi
     let defaultLabelColor = UIColor.black // Varsayılan label rengi
     
     var isLoading = false
@@ -38,10 +37,11 @@ class HomeViewController: UIViewController {
     var charachter: [Character] = []
     
     
+    var locationResident: Location?
+    
+    
     //tıklanan lokaston idsi.
     //var selectedLocationId: Int?
-    
-    var getLocationClicked: Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +61,7 @@ class HomeViewController: UIViewController {
         }
         
         viewModel.successCallback = { [weak self] in
+            
             self?.locationsCollectionView.reloadData()
             self?.characterCollectionView.reloadData()
             ProgressHUD.dismiss()
@@ -96,8 +97,8 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
         default:
             return 0
+            
         }
-        
         
     }
     
@@ -118,7 +119,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
             if indexPath.item == locations.count && isLoading {
                 // cell.activityIndicator.startAnimating()
-                    //indicator eklenecektirr..
+                //indicator eklenecektirr..
             }
             
             // Seçili hücrenin label rengini değiştir
@@ -138,7 +139,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
         case characterCollectionView:
             let characterCellIdentifier = CharactersCollectionViewCell.identifier
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: characterCellIdentifier, for: indexPath) as! CharactersCollectionViewCell
-            //cell.setupCharactersList(character: charachter[indexPath.row])
+            
             cell.setupCharactersList(character: viewModel.charactersData[indexPath.row])
             
             return cell
@@ -158,36 +159,44 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
             let controller = CharacterDetailViewController.instantiate()
             controller.character = collectionView == characterCollectionView ? viewModel.charactersData[indexPath.row] : nil
-            // print("Clicked : ", viewModel.charactersData[indexPath.row])
             navigationController?.pushViewController(controller, animated:true)
             
         } else if collectionView == locationsCollectionView {
             
-            viewModel.locationClicked = viewModel.locationsData[indexPath.row]
-            viewModel.getCharacterId() //tıklandığın bu fonksiyon çağrılarak resisten idler bir başka arraya alınacaktır.
-            
-            print("viewModel.getCharacterId() : ",viewModel.getCharacterId())
-            print("viewModel.locationClicked :", viewModel.locationClicked)
-            
-            viewModel.getCharactersById()
-            
-            //characterCollectionView.reloadData()
-            collectionView.reloadData()
-            
-            
+            DispatchQueue.main.async {
+                
+                self.selectedIndexPath = indexPath //tıklanan indexPathe göre renk değiştirme işlemi yaptık.
+                self.viewModel.locationClicked = self.viewModel.locationsData[indexPath.row]
+                
+                let characterURLs = self.viewModel.locationsData[indexPath.row]
+                
+                let characterIDs = characterURLs.residents.compactMap { url -> Int? in
+                    
+                    // URL'yi bölüp karakter ID'sini alın
+                    let components = url.split(separator: "/")
+                    return Int(components.last ?? "")
+                }
+                
+                let characterIDString = characterIDs.map { String($0) }.joined(separator: ",")
+                self.viewModel.getCharactersId = characterIDString
+                self.viewModel.getCharacterItemsById()
+                
+            }
         }
+        collectionView.reloadData()
+        
     }
-    
-    
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let endScrolling = scrollView.contentOffset.x + scrollView.frame.width
-        if endScrolling >= scrollView.contentSize.width {
-            //Son hücre görüntülendi, bir sonraki sayfayı yükleyin
-            viewModel.loadNextPage()
-        }
-    }
-    
-    
-    
 }
+
+
+func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    let endScrolling = scrollView.contentOffset.x + scrollView.frame.width
+    if endScrolling >= scrollView.contentSize.width {
+        
+        //Son hücre görüntülendi, bir sonraki sayfayı yükleyin
+        //  viewModel.loadNextPage()
+        
+    }
+}
+
+
