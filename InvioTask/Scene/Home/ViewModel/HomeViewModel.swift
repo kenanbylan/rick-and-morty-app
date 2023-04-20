@@ -18,7 +18,6 @@ class HomeViewModel {
     var coordinator: HomeCoordinator?
     let networkManager = HomeManager.shared
     
-    
     var locationsData = [Location]()
     var charactersData = [Character]() // buradaki değişiklik yapıldı
     
@@ -29,28 +28,36 @@ class HomeViewModel {
     var successCallback: (()->())?
     
     
-    var getCharactersId: String?
+    //For lazy load.
+    var currentPage = 1
+    var isLoading = false
+    var locations: [Location] = []
     
     
-    func getLocationItems() {
+    var getCharactersId: [Int]? //tıklanan karakterli tutmak için oluşturulan array.
+    
+    func getLocationItems(page: Int) {
         
-        networkManager.getLocations { locations, error in
+        networkManager.getLocations(page: currentPage) { locations, error in
             
             if let error = error {
                 print("Hata oluştu: \(error.localizedDescription)")
                 self.errorCallback?(error.localizedDescription)
+                
             } else {
                 if let locations = locations {
                     self.locationsData = locations.locations
                 }
             }
             self.successCallback?()
+            
         }
+        
     }
     
     
     func getCharacterItems() {
-        networkManager.getCharacters { character, error in
+        networkManager.getCharacters(id: "") { character, error in
             if let error = error {
                 print("Hata oluştu getCharacterItems : \(error.localizedDescription)")
                 self.errorCallback?(error.localizedDescription)
@@ -66,20 +73,15 @@ class HomeViewModel {
         }
     }
     
-    
-    
     func getCharacterItemsById()  {
-        
-        print("getCharactersId :" , getCharactersId)
-        
-        
-        networkManager.getCharactersById(characterIds: getCharactersId ?? "31,2,3,4") { character, error in
-            
+        networkManager.getCharactersById(characterIds: getCharactersId! ) { character, error in
             if let error = error {
                 print("Hata oluştu getCharacterItems : \(error)")
                 self.errorCallback?(error.localizedDescription)
                 
             } else {
+                
+                
                 if let character = character {
                     print(" getCharacterItemsById results : ",   character)
                     self.charactersData = character
@@ -111,7 +113,11 @@ class HomeViewModel {
         //                print(error)
         //            }
         //        }
+        
     }
-    
-    
 }
+
+
+
+
+
