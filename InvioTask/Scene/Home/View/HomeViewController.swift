@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     
     
     var charachter: [Character] = []
+    var globalCell: LocationsCollectionViewCell? = nil
     
     
     
@@ -37,6 +38,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         registerCellNibs()
         returnViewModel()
+        
     }
     
     
@@ -99,13 +101,32 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
         
         switch collectionView {
             
-            //MARK: -bu kısmı geliştir ayrı bir class olarak ayarla dolabilir.
         case locationsCollectionView:
             let locationCellIdentifier = LocationsCollectionViewCell.identifier
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: locationCellIdentifier, for: indexPath) as! LocationsCollectionViewCell
             
             cell.setupLocations(locations: viewModel.locationsData[indexPath.row])
+
+            
+            //LAZY LOAD PROCESS.
+            if indexPath.row >= viewModel.locationsData.count - 3 {
+                // If this is one of the last three cells, add a special activity indicator
+
+                cell.activityIndicator.isHidden = false
+                cell.activityIndicator.startAnimating()
+                // Perform lazy loading
+                print("viewModel.locationsData : ",viewModel.locationsData )
+                self.viewModel.currentPage += 1
+                
+                print("location page: ",viewModel.currentPage) //working
+                self.viewModel.getLocationItems(page: self.viewModel.currentPage)
+                
+                
+            } else {
+                cell.activityIndicator.isHidden = true
+                cell.activityIndicator.stopAnimating()
+            }
             
             
             // Seçili hücrenin label rengini değiştir
@@ -124,8 +145,8 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             let characterCellIdentifier = CharactersCollectionViewCell.identifier
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: characterCellIdentifier, for: indexPath) as! CharactersCollectionViewCell
             
-            cell.setupCharactersList(character: viewModel.charactersData[indexPath.row])
             
+            cell.setupCharactersList(character: viewModel.charactersData[indexPath.row])
             return cell
             
         default:
@@ -134,17 +155,6 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
         }
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if indexPath.item == viewModel.locationsData.count - 1 && !viewModel.isLoading {
-            viewModel.currentPage += 1
-            viewModel.getLocationItems(page: viewModel.currentPage)
-            
-        }
-        
-        
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -159,13 +169,12 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
             DispatchQueue.main.async {
                 ProgressHUD.show()
+                
                 self.selectedIndexPath = indexPath //tıklanan indexPathe göre renk değiştirme işlemi yaptık.
-                self.viewModel.locationClicked = self.viewModel.locationsData[indexPath.row]
                 
                 let characterURLs = self.viewModel.locationsData[indexPath.row]
                 let characterIDs = characterURLs.residents.compactMap { url -> Int? in
                     
-                    // URL'yi bölüp karakter ID'sini alın
                     let components = url.split(separator: "/")
                     return Int(components.last ?? "")
                 }
@@ -180,9 +189,5 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
         
         collectionView.reloadData()
     }
-    
-    
-    
-    
     
 }

@@ -2,11 +2,6 @@
 //  InvioTask
 //  Created by Kenan Baylan on 17.04.2023.
 
-
-//result.location.url= bu kısımdaki urlin en sonundaki değerleri alıp ayrı bir dizide tutacağız.
-//result.name
-
-
 import Foundation
 import UIKit
 import Alamofire
@@ -23,7 +18,6 @@ class HomeViewModel {
     var charactersData = [Character]()
     
     
-    var locationClicked: Location? //clicked location objects.
 
     var errorCallback: ((String)->())?
     var successCallback: (()->())?
@@ -58,7 +52,7 @@ class HomeViewModel {
     func getCharacterItems() {
         networkManager.getCharacters(id: "") { character, error in
             if let error = error {
-                print("Hata oluştu getCharacterItems : \(error.localizedDescription)")
+                print("Error getCharacterItems : \(error.localizedDescription)")
                 self.errorCallback?(error.localizedDescription)
                 
             } else {

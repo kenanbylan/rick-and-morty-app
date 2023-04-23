@@ -55,7 +55,6 @@ class HomeManager: HomeManagerProtocol {
         }
     }
     
-    
     //MARK: Characters after clicking the location.
     func getCharactersById(characterIds: [Int] ,complete: @escaping (([Character]?, Error?) -> ())) {
         

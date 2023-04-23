@@ -8,12 +8,10 @@ import UIKit
 
 class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
+
     
-    
-    // var filterSelection: ((MovieCategory)->())?
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        
     }
     
     

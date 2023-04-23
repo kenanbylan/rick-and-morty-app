@@ -30,14 +30,17 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     
     //This will be fixed.
     func setupLocations(locations: Location) {
-        if locations == nil {
-            activityIndicator.isHidden = false
-        } else {
-            activityIndicator.isHidden = true
-            locationLabel.text = locations.name
-
-        }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        locationLabel.isHidden = true
         
+        // Fetch necessary data here
+        
+        
+        locationLabel.text = locations.name
+        locationLabel.isHidden = false
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     

@@ -22,6 +22,7 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Splash screen hello or welcome text.
         if defaults.bool(forKey: "hasOpenedBefore") {
             welcomeLabel.text = "Hello!"
@@ -31,7 +32,7 @@ class LoadingViewController: UIViewController {
         
         viewAnimation()
         showHomeView()
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,9 +62,6 @@ class LoadingViewController: UIViewController {
         view.layer.add(animation, forKey: "opacity")
         
     }
-    
-    
-    
     
     
     private func showHomeView() {

@@ -26,7 +26,7 @@ struct NetworkService {
                     completion(response)
                 }
                 
-            case .failure(let _):
+            case .failure(_):
                 completion(.failure(.generalError))
             }
         }

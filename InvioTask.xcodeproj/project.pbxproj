@@ -183,9 +183,9 @@
 		6E3E83ED29E46D7B007CABD5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				6E3E83FF29E479D8007CABD5 /* CardView.swift */,
 				6E3E840529E48535007CABD5 /* CharactersCell */,
 				6E3E83F529E4788A007CABD5 /* LocationsCell */,
-				6E3E83FF29E479D8007CABD5 /* CardView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -221,10 +221,10 @@
 		6E51BB8429EC098A00182B31 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6E51BB8E29EC9E6A00182B31 /* HomeCoordinator.swift */,
 				6E51BB8629EC099C00182B31 /* Model */,
 				6E51BB8829EC09A900182B31 /* ViewModel */,
 				6E51BB8729EC09A100182B31 /* View */,
-				6E51BB8E29EC9E6A00182B31 /* HomeCoordinator.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
