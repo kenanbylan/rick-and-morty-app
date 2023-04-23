@@ -15,7 +15,6 @@ struct NetworkService {
     private init() {}
     
     
-    
     func request<T: Codable>(type: T.Type,
                              url: String,
                              method: HTTPMethod,
@@ -24,28 +23,22 @@ struct NetworkService {
             switch response.result {
             case .success(let data):
                 self.handleResponse(data: data) { response in
-                    print("istek gonderildi..")
                     completion(response)
                 }
                 
-            
             case .failure(let _):
-                print("af request error")
                 completion(.failure(.generalError))
-            
             }
         }
     }
     
     fileprivate func handleResponse<T: Codable>(data: Data, completion: @escaping((Result<T, ErrorTypes>)->())) {
         
-        //bu kısımda patlıyor
         do {
             let result = try JSONDecoder().decode(T.self, from: data)
             completion(.success(result))
             
         } catch {
-            print("handleResponse hata cikti: ", error)
             completion(.failure(.invalidData))
         }
     }

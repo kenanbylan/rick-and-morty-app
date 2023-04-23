@@ -9,10 +9,11 @@ import UIKit
 import Kingfisher
 
 class CharacterDetailViewController: UIViewController {
-    
+
+    //MARK: Instance casting
     var character: Character!
     
-    
+    //MARK: UIElements
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var specyLabel: UILabel!
@@ -56,7 +57,6 @@ class CharacterDetailViewController: UIViewController {
     
     func getEpisodeIDs(from episodes: [String]) -> String? {
         let episodeIDs = episodes.compactMap { url -> String? in
-            // URL'yi bölüp bölüm ID'sini alın
             let components = url.split(separator: "/")
             return String(components.last ?? "")
         }

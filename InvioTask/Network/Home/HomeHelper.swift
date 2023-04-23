@@ -13,13 +13,14 @@ enum HomeEndpoint: String {
     
     case getLocations = "/location?page="
     case getCharacters = "/character"
-    case getCharactersById = "/character/" //farkı array gelecektir yanınaç
+    case getCharactersById = "/character/"
     
     //https://rickandmortyapi.com/api/location?page=1
     
+    //MARK: -Example: HomeEnpoint.getLocations.path
     var path: String {
         switch self {
-            
+        
         case .getLocations:
             return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getLocations.rawValue)
             
@@ -29,7 +30,6 @@ enum HomeEndpoint: String {
         case .getCharactersById:
             return NetworkHelper.shared.requestUrl(url: HomeEndpoint.getCharactersById.rawValue)
         }
-        
     }
 }
 

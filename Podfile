@@ -9,7 +9,5 @@ target 'InvioTask' do
   pod 'Alamofire'
   pod "IQKeyboardManagerSwift"
   pod 'ProgressHUD'
-  pod 'lottie-ios'
-  
   
 end

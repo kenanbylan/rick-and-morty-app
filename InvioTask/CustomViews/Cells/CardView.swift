@@ -31,13 +31,10 @@ class CardView: UIView {
         layer.shadowRadius = 10
         layer.borderWidth = 0.5
         if traitCollection.userInterfaceStyle == .dark {
-            layer.borderColor = UIColor.white.cgColor
+            layer.borderColor = UIColor.black.cgColor
         } else {
             layer.borderColor = UIColor.white.cgColor
         }
     }
-    
-    
-    
     
 }

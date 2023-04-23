@@ -18,7 +18,7 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
         
         if traitCollection.userInterfaceStyle == .dark {
             locationLabel.textColor = .white
@@ -28,6 +28,7 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //This will be fixed.
     func setupLocations(locations: Location) {
         if locations == nil {
             activityIndicator.isHidden = false

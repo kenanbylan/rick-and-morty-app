@@ -21,8 +21,6 @@ struct LocationResponse: Codable {
     }
 }
 
-
-
 struct Location: Codable {
     
     let id: Int

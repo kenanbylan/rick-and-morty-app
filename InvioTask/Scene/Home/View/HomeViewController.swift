@@ -1,18 +1,17 @@
-//
 //  HomeViewController.swift
 //  InvioTask
-//
 //  Created by Kenan Baylan on 10.04.2023.
 
 
 import UIKit
 import ProgressHUD
 
-//C: compact küçük.
-//R: regular büyük.
+//C: compact small.
+//R: regular big.
 
 class HomeViewController: UIViewController {
     
+    //singleton
     static let shared = HomeViewController()
     
     let viewModel = HomeViewModel()
@@ -25,9 +24,10 @@ class HomeViewController: UIViewController {
     
     
     //MARK: Variables
-    var selectedIndexPath: IndexPath? // Seçili hücrenin indeksi
-    let selectedLabelColor = UIColor.systemGreen // Seçili hücrenin label rengi
-    let defaultLabelColor = UIColor.black // Varsayılan label rengi
+    var selectedIndexPath: IndexPath? //Index of the selected cell
+    let selectedLabelColor = UIColor.systemGreen // labelColor of the selected cell.
+    let defaultLabelColor = UIColor.black // Default labelColor
+    
     
     var charachter: [Character] = []
     
@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
     
     
     fileprivate func returnViewModel(){
+        
         ProgressHUD.show()
         
         DispatchQueue.main.async {
@@ -48,7 +49,7 @@ class HomeViewController: UIViewController {
             self.viewModel.getLocationItems(page: self.viewModel.currentPage) //page = 1 için yapılıyor.
         }
         
-        viewModel.errorCallback = { [weak self] errorMessage in
+        viewModel.errorCallback = {  errorMessage in
             print("errorMessage :", errorMessage)
         }
         
@@ -110,11 +111,9 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             // Seçili hücrenin label rengini değiştir
             if indexPath == selectedIndexPath {
                 cell.locationLabel.textColor = selectedLabelColor
-                //!characterCollectionView.reloadData() hata olabilir
             } else {
                 if traitCollection.userInterfaceStyle == .dark {
                     cell.locationLabel.textColor = .white
-                    
                 } else {
                     cell.locationLabel.textColor = .black
                 }

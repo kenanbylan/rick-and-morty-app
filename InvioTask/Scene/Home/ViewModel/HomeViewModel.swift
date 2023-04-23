@@ -15,22 +15,20 @@ class HomeViewModel {
     
     static let shared = HomeViewModel()
     
+    //MARK: Properties or Variables.
     var coordinator: HomeCoordinator?
     let networkManager = HomeManager.shared
     
     var locationsData = [Location]()
-    var charactersData = [Character]() // buradaki değişiklik yapıldı
+    var charactersData = [Character]()
     
-    //tıklanan location objesi.
-    var locationClicked: Location?
     
+    var locationClicked: Location? //clicked location objects.
+
     var errorCallback: ((String)->())?
     var successCallback: (()->())?
     
-    
-    var getCharactersId: [Int]? //tıklanan karakterli tutmak için oluşturulan array.
-    
-    
+    var getCharactersId: [Int]? //array created to kepp clicked characters ID.
     
     //For lazy load.
     var currentPage = 1
@@ -38,13 +36,11 @@ class HomeViewModel {
     
     
     func getLocationItems(page: Int) {
-        print("page :", page)
+        
         isLoading = true
         
         networkManager.getLocations(page: currentPage) {  locations, error in
-            
             if let error = error {
-                print("Hata oluştu: \(error.localizedDescription)")
                 self.errorCallback?(error.localizedDescription) //
                 
             } else {
@@ -57,6 +53,7 @@ class HomeViewModel {
         }
         
     }
+    
     
     func getCharacterItems() {
         networkManager.getCharacters(id: "") { character, error in
@@ -75,19 +72,13 @@ class HomeViewModel {
     }
     
     
-    func getCharacterItemsById()  {
-        
-        //değişebilir.
+    func getCharacterItemsById() {
         networkManager.getCharactersById(characterIds: getCharactersId! ) { character, error in
-            
             if let error = error {
-                print("Hata oluştu getCharacterItems : \(error)")
                 self.errorCallback?(error.localizedDescription)
-                
             } else {
                 
                 if let character = character {
-                    print(" getCharacterItemsById results : ",   character)
                     self.charactersData = character
                 }
             }

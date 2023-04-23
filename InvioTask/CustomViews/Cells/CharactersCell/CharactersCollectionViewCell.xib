@@ -25,7 +25,7 @@
                                 <rect key="frame" x="140" y="10" width="170" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTU-r3-P5B">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="R5g-kf-dNl"/>
                                         </constraints>
@@ -33,15 +33,32 @@
                                         <color key="textColor" name="yellow"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C3E-nt-bKy">
-                                        <rect key="frame" x="0.0" y="50" width="84" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="C3E-nt-bKy">
+                                        <rect key="frame" x="0.0" y="34" width="92.333333333333329" height="30.666666666666671"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="Htd-Ze-otq">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="50"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="KRk-fO-e76">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30.666666666666668"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dead" translatesAutoresizingMaskIntoConstraints="NO" id="KRk-fO-e76">
-                                                <rect key="frame" x="52" y="0.0" width="32" height="50"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7a-gG-c5S">
+                                                <rect key="frame" x="42" y="0.0" width="50.333333333333343" height="30.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6AK-6t-xjY">
+                                        <rect key="frame" x="0.0" y="69.666666666666671" width="79.666666666666671" height="30.333333333333329"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dead" translatesAutoresizingMaskIntoConstraints="NO" id="Htd-Ze-otq">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="30.333333333333332"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dead" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-iZ-1AG">
+                                                <rect key="frame" x="42" y="0.0" width="37.666666666666657" height="30.333333333333332"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -84,6 +101,8 @@
             <connections>
                 <outlet property="characterImageView" destination="GaX-vG-cds" id="S5z-6F-VSj"/>
                 <outlet property="characterName" destination="dTU-r3-P5B" id="y9v-0Z-fNn"/>
+                <outlet property="deadLabel" destination="PrX-iZ-1AG" id="9Fs-By-fjh"/>
+                <outlet property="femaleLabel" destination="G7a-gG-c5S" id="E6V-xM-s6Z"/>
                 <outlet property="genderImageView" destination="KRk-fO-e76" id="1K3-ey-Awh"/>
                 <outlet property="isAliveImageView" destination="Htd-Ze-otq" id="KPp-5k-3N3"/>
             </connections>

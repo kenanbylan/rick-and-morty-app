@@ -3,9 +3,10 @@
 //  Created by Kenan Baylan on 15.04.2023.
 
 import UIKit
-import Lottie
+
 
 class LoadingViewController: UIViewController {
+    
     
     //MARK: UIElements
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -17,57 +18,60 @@ class LoadingViewController: UIViewController {
     private let isUserLogin = true
     private let defaults = UserDefaults.standard
     
-    let animationView = LottieAnimationView()
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        //Splash screen hello or welcome text.
         if defaults.bool(forKey: "hasOpenedBefore") {
-            // Uygulama daha önce açılmış. Hello yazdır.
             welcomeLabel.text = "Hello!"
         } else {
-            // Uygulama ilk defa açılıyor. Welcome yazdır ve hasOpenedBefore değerini kaydet.
             defaults.set(true, forKey: "hasOpenedBefore")
         }
         
+        viewAnimation()
         showHomeView()
-        setupAnimationView()
+       
     }
-    
-    private func setupAnimationView() {
-        
-        
-    }
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         delay(durationInSeconds: 2.0) {
-            //    self.animationView.stop()
             self.showHomeView()
         }
     }
     
     
+    
+    
+    private func viewAnimation() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse], animations: {
+            self.imageView.alpha = 0.0
+        }, completion: nil)
+        
+        
+        let animation = CABasicAnimation(keyPath: "opacity")
+        animation.duration = 1.5
+        animation.fromValue = 1.0
+        animation.toValue = 0.0
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animation.autoreverses = true
+        animation.repeatCount = .infinity
+        view.layer.add(animation, forKey: "opacity")
+        
+    }
+    
+    
+    
+    
+    
     private func showHomeView() {
         if isUserLogin {
             performSegue(withIdentifier: "toHomeNC", sender: nil)
-            
-           // let navigationController = UINavigationController(rootViewController: HomeViewController())
-           // present(navigationController, animated: true, completion: nil)
-            
-        } else {
-            
         }
-        
     }
+    
+    
     
 }

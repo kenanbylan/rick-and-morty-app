@@ -13,7 +13,6 @@ struct CharacterResponse: Codable {
 
 struct CharacterResponseById : Codable {
     let results: [Character]
-    
 }
 
 
@@ -32,8 +31,8 @@ struct Character: Codable {
     let url: String
     let created: String
     
+    
     enum CodingKeys: String, CodingKey {
-        
         
         case id
         case name
