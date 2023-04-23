@@ -1,5 +1,8 @@
 # Rick and Morty Characters App.
 
+## Projeyi incelerken proje hakkında yazdığım raporu ve özgeçmiş yazımı bu repo dosyaları içerisinde bulunan .docx uzantılı dosyalardan inceleyebilrisiniz. 
+
+
 ### It is an application created to obtain basic achievements defined by Invio Bilisim company and to learn preliminary information for internship.
 
 
