@@ -1,5 +1,6 @@
-# NetflixCloneMVVM
- I cloned the video series on the freecodecamp youtube channel, which includes topics such as MVVM architecture and network operations made as no storybody, architecture theory, model creation, and provides information on how to implement tableview and viewcell.
+# Rick and Morty Characters App.
+
+### It is an application created to obtain basic achievements defined by Invio Bilisim company and to learn preliminary information for internship.
 
 
 <p> 
