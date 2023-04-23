@@ -29,14 +29,12 @@ class HomeViewModel {
     
     
     var getCharactersId: [Int]? //tıklanan karakterli tutmak için oluşturulan array.
-
     
     
     
     //For lazy load.
     var currentPage = 1
     var isLoading :Bool = false
-    var locations: [Location] = []
     
     
     func getLocationItems(page: Int) {
@@ -52,9 +50,7 @@ class HomeViewModel {
             } else {
                 if let locations = locations {
                     self.isLoading = false
-                    //                    self.locationsData = locations.locations
                     self.locationsData.append(contentsOf: locations.locations)
-                    //sayfa yenilenmeli..
                 }
             }
             self.successCallback?() //succes dönerse collectionView.reloadData() yapılacak

@@ -29,15 +29,14 @@ class HomeViewController: UIViewController {
     let selectedLabelColor = UIColor.systemGreen // Seçili hücrenin label rengi
     let defaultLabelColor = UIColor.black // Varsayılan label rengi
     
-    
     var charachter: [Character] = []
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
         returnViewModel()
-        
     }
     
     
@@ -57,7 +56,6 @@ class HomeViewController: UIViewController {
         viewModel.successCallback = { [weak self] in
             self?.locationsCollectionView.reloadData() //succes gelirse datalar yenilenmelidir.
             self?.characterCollectionView.reloadData()
-            
             ProgressHUD.dismiss()
         }
         
@@ -72,8 +70,7 @@ class HomeViewController: UIViewController {
         
         let characterNibname = CharactersCollectionViewCell.identifier
         characterCollectionView.register(UINib(nibName: characterNibname, bundle: nil), forCellWithReuseIdentifier: characterNibname)
-     
-
+        
     }
 }
 
@@ -174,20 +171,19 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
                     return Int(components.last ?? "")
                 }
                 
-                    self.viewModel.getCharactersId = characterIDs //tıklanan karakter idler alındı.
-                    self.viewModel.getCharacterItemsById()
+                self.viewModel.getCharactersId = characterIDs //tıklanan karakter idler alındı.
+                self.viewModel.getCharacterItemsById()
                 
             }
-            ProgressHUD.dismiss()
             
+            ProgressHUD.dismiss()
         }
-        print("viewModel.charactersData : ",viewModel.charactersData)
         
         collectionView.reloadData()
     }
     
     
     
-  
+    
     
 }

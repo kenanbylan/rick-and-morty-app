@@ -12,6 +12,9 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: LocationsCollectionViewCell.self)
     @IBOutlet weak var locationLabel: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +29,14 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     }
     
     func setupLocations(locations: Location) {
-        locationLabel.text = locations.name
+        if locations == nil {
+            activityIndicator.isHidden = false
+        } else {
+            activityIndicator.isHidden = true
+            locationLabel.text = locations.name
+
+        }
+        
     }
     
     
