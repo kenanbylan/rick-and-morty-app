@@ -18,25 +18,17 @@ protocol HomeManagerProtocol {
 
 class HomeManager: HomeManagerProtocol {
     
-    
     static let shared = HomeManager()
-    
-    //let viewModel = HomeViewModel() //hata çıkabilir?
-    
-    var characterIDs: [Int] = [] //tüm lokasyonların idleri alındı. ardından ardından tıklana lokasyonun
-    
-    
+   
     func getLocations(page: Int, complete: @escaping ((LocationResponse?, Error?) -> ())) {
-        NetworkService.shared.request(type: LocationResponse.self, url: HomeEndpoint.getLocations.path, method: .get) { response in
+        
+        var url = HomeEndpoint.getLocations.path + "\(page)"
+        
+        NetworkService.shared.request(type: LocationResponse.self, url: url , method: .get) { response in
             
             switch response {
             case .success(let locationResponse):
-                let characterURLs = locationResponse.locations.flatMap { $0.residents }
                 
-                let ids = characterURLs.compactMap { Int($0.components(separatedBy: "/").last ?? "") }
-                self.characterIDs.append(contentsOf: ids)
-                
-                //  print("characterIDs : ", self.characterIDs)
                 complete(locationResponse, nil)
                 
             case .failure(let error):
@@ -44,9 +36,7 @@ class HomeManager: HomeManagerProtocol {
                 complete(nil, error)
             }
         }
-        
     }
-    
     
     
     func getCharacters(id: String, complete: @escaping ((CharacterResponse?, Error?) -> ())) {
@@ -57,7 +47,6 @@ class HomeManager: HomeManagerProtocol {
                 
                 switch response {
                 case .success(let characterResponse):
-                    
                     
                     print("characterResponse: ", characterResponse.results.count)
                     complete(characterResponse,nil)
@@ -76,11 +65,9 @@ class HomeManager: HomeManagerProtocol {
     
     func getCharactersById(characterIds: [Int] ,complete: @escaping (([Character]?, Error?) -> ())) {
         
-        
-        
-        
-        //tek bir array de geliyorsa farklı bir model yazmak istedim.
-        if characterIds.count == 1 {
+        if characterIds.count == 0 {
+            complete([], nil)
+        } else   if characterIds.count == 1 {
             
             print("characterIds : ", characterIds)
             
@@ -107,21 +94,11 @@ class HomeManager: HomeManagerProtocol {
             
             
             
-        } else if characterIds.isEmpty {
-            
-            
-            complete(nil, nil)
-            return
-
-            
-        }
-        
-        else {
+        }  else {
             let characterIDString = characterIds.map { String($0) }.joined(separator: ",")
             
             let url = HomeEndpoint.getCharactersById.path + characterIDString
             print("url : ", url)
-            
             
             NetworkService.shared.request(type: [Character].self, url: url, method: .get) { response in
                 
@@ -129,7 +106,7 @@ class HomeManager: HomeManagerProtocol {
                     switch response {
                     case .success(let characterResponse):
                         
-                        //æ print("characterResponse313131: ", characterResponse.results.count)
+                        //print("characterResponse313131: ", characterResponse.results.count)
                         complete(characterResponse ,nil)
                         
                     case .failure(let error):
@@ -142,10 +119,10 @@ class HomeManager: HomeManagerProtocol {
                     complete(nil, error)
                 }
             }
-            
+
         }
-        
     }
+    
     
 }
 

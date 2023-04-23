@@ -1,0 +1,6 @@
+framework module Pods_InvioTask {
+  umbrella header "Pods-InvioTask-umbrella.h"
+
+  export *
+  module * { export * }
+}

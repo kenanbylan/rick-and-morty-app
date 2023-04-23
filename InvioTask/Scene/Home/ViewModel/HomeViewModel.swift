@@ -28,33 +28,39 @@ class HomeViewModel {
     var successCallback: (()->())?
     
     
+    var getCharactersId: [Int]? //tıklanan karakterli tutmak için oluşturulan array.
+
+    
+    
+    
     //For lazy load.
     var currentPage = 1
-    var isLoading = false
+    var isLoading :Bool = false
     var locations: [Location] = []
     
     
-    var getCharactersId: [Int]? //tıklanan karakterli tutmak için oluşturulan array.
-    
     func getLocationItems(page: Int) {
+        print("page :", page)
+        isLoading = true
         
-        networkManager.getLocations(page: currentPage) { locations, error in
+        networkManager.getLocations(page: currentPage) {  locations, error in
             
             if let error = error {
                 print("Hata oluştu: \(error.localizedDescription)")
-                self.errorCallback?(error.localizedDescription)
+                self.errorCallback?(error.localizedDescription) //
                 
             } else {
                 if let locations = locations {
-                    self.locationsData = locations.locations
+                    self.isLoading = false
+                    //                    self.locationsData = locations.locations
+                    self.locationsData.append(contentsOf: locations.locations)
+                    //sayfa yenilenmeli..
                 }
             }
-            self.successCallback?()
-            
+            self.successCallback?() //succes dönerse collectionView.reloadData() yapılacak
         }
         
     }
-    
     
     func getCharacterItems() {
         networkManager.getCharacters(id: "") { character, error in
@@ -63,7 +69,6 @@ class HomeViewModel {
                 self.errorCallback?(error.localizedDescription)
                 
             } else {
-                
                 if let character = character {
                     //print("Characterss ViewModel : ", character.results[0])
                     self.charactersData = character.results
@@ -73,48 +78,30 @@ class HomeViewModel {
         }
     }
     
+    
     func getCharacterItemsById()  {
+        
+        //değişebilir.
         networkManager.getCharactersById(characterIds: getCharactersId! ) { character, error in
+            
             if let error = error {
                 print("Hata oluştu getCharacterItems : \(error)")
                 self.errorCallback?(error.localizedDescription)
                 
             } else {
                 
-                
                 if let character = character {
                     print(" getCharacterItemsById results : ",   character)
                     self.charactersData = character
                 }
             }
-            self.successCallback?()
             
+            self.successCallback?()
         }
     }
     
     
-    func loadNextPage() {
-        
-        // loading hücresi koleksiyon görünümüne
-        //  homeViewController.isLoading = true
-        //  homeViewController.locationsCollectionView.reloadData()
-        
-        //API isteği yapın
-        //        APIManager.shared.getLocations(page: self.page) { result in
-        //            switch result {
-        //            case .success(let locations):
-        //                self.page += 1
-        //                // Verileri koleksiyon görünümüne ekleme
-        //                self.locations.append(contentsOf: locations)
-        //                // loading hücresini koleksiyondan kaldırın
-        //                self.isLoading = false
-        //                self.collectionView.reloadData()
-        //            case .failure(let error):
-        //                print(error)
-        //            }
-        //        }
-        
-    }
+    
 }
 
 

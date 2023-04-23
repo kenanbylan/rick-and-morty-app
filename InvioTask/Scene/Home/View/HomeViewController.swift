@@ -15,7 +15,6 @@ class HomeViewController: UIViewController {
     
     static let shared = HomeViewController()
     
-    
     let viewModel = HomeViewModel()
     
     
@@ -29,9 +28,6 @@ class HomeViewController: UIViewController {
     var selectedIndexPath: IndexPath? // Seçili hücrenin indeksi
     let selectedLabelColor = UIColor.systemGreen // Seçili hücrenin label rengi
     let defaultLabelColor = UIColor.black // Varsayılan label rengi
-    
-    
-    
     
     
     var charachter: [Character] = []
@@ -50,9 +46,8 @@ class HomeViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.viewModel.getCharacterItems()
-            self.viewModel.getLocationItems(page: self.viewModel.currentPage)
+            self.viewModel.getLocationItems(page: self.viewModel.currentPage) //page = 1 için yapılıyor.
         }
-        
         
         viewModel.errorCallback = { [weak self] errorMessage in
             print("errorMessage :", errorMessage)
@@ -60,9 +55,9 @@ class HomeViewController: UIViewController {
         
         
         viewModel.successCallback = { [weak self] in
-            
-            self?.locationsCollectionView.reloadData()
+            self?.locationsCollectionView.reloadData() //succes gelirse datalar yenilenmelidir.
             self?.characterCollectionView.reloadData()
+            
             ProgressHUD.dismiss()
         }
         
@@ -77,7 +72,8 @@ class HomeViewController: UIViewController {
         
         let characterNibname = CharactersCollectionViewCell.identifier
         characterCollectionView.register(UINib(nibName: characterNibname, bundle: nil), forCellWithReuseIdentifier: characterNibname)
-        
+     
+
     }
 }
 
@@ -104,6 +100,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
+            
             //MARK: -bu kısmı geliştir ayrı bir class olarak ayarla dolabilir.
         case locationsCollectionView:
             let locationCellIdentifier = LocationsCollectionViewCell.identifier
@@ -111,12 +108,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: locationCellIdentifier, for: indexPath) as! LocationsCollectionViewCell
             
             cell.setupLocations(locations: viewModel.locationsData[indexPath.row])
-            if indexPath.item == viewModel.locations.count - 1  && !viewModel.isLoading {
-                
-                viewModel.currentPage += 1
-                viewModel.getLocationItems(page: viewModel.currentPage)
-                
-            }
+            
             
             // Seçili hücrenin label rengini değiştir
             if indexPath == selectedIndexPath {
@@ -140,7 +132,6 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
             return cell
             
-            
         default:
             return UICollectionViewCell()
             
@@ -148,6 +139,16 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == viewModel.locationsData.count - 1 && !viewModel.isLoading {
+            viewModel.currentPage += 1
+            viewModel.getLocationItems(page: viewModel.currentPage)
+            
+        }
+        
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -155,71 +156,38 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDataSou
             
             let controller = CharacterDetailViewController.instantiate()
             controller.character = collectionView == characterCollectionView ? viewModel.charactersData[indexPath.row] : nil
+            
             navigationController?.pushViewController(controller, animated:true)
             
         } else if collectionView == locationsCollectionView {
             
             DispatchQueue.main.async {
-                
+                ProgressHUD.show()
                 self.selectedIndexPath = indexPath //tıklanan indexPathe göre renk değiştirme işlemi yaptık.
                 self.viewModel.locationClicked = self.viewModel.locationsData[indexPath.row]
                 
                 let characterURLs = self.viewModel.locationsData[indexPath.row]
-                
                 let characterIDs = characterURLs.residents.compactMap { url -> Int? in
                     
                     // URL'yi bölüp karakter ID'sini alın
                     let components = url.split(separator: "/")
                     return Int(components.last ?? "")
-                    
                 }
-                if characterIDs.isEmpty {
-                    self.viewModel.getCharactersId = [] // getCharactersId array'inin içini boş bir array ile güncelle
-                    collectionView.reloadData() // collectionView'ı yenile
-                    
-                } else {
+                
                     self.viewModel.getCharactersId = characterIDs //tıklanan karakter idler alındı.
                     self.viewModel.getCharacterItemsById()
-                }
-                
-                
                 
             }
+            ProgressHUD.dismiss()
+            
         }
-        collectionView.reloadData()
+        print("viewModel.charactersData : ",viewModel.charactersData)
         
+        collectionView.reloadData()
     }
     
     
     
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            loadNewPage()
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        loadNewPage()
-    }
-    
-    
-    //for lazy load
-    private func loadNewPage() {
-        let offsetY = locationsCollectionView.contentOffset.y
-        let contentHeight = locationsCollectionView.contentSize.height
-        let screenHeight = locationsCollectionView.frame.size.height
-        if offsetY > contentHeight - screenHeight {
-            viewModel.currentPage += 1
-            viewModel.getLocationItems(page: viewModel.currentPage)
-        }
-    }
-    
-    
+  
     
 }
-
-
-
-
-

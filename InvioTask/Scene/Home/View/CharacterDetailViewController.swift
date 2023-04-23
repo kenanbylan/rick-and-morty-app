@@ -12,6 +12,7 @@ class CharacterDetailViewController: UIViewController {
     
     var character: Character!
     
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var specyLabel: UILabel!
@@ -22,14 +23,22 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet weak var createAtLabel: UILabel!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCharacterDetail()
+        if let font = UIFont(name: "AvenirNext-Medium", size: 22) {
+            navigationController?.navigationBar.largeTitleTextAttributes = [.font: font]
+            navigationController?.navigationBar.titleTextAttributes = [.font: font]
+        }
         
+        setupCharacterDetail()
     }
     
     private func setupCharacterDetail() {
+        
+        let episodeIDs = getEpisodeIDs(from: character.episode)
+        print("character.episode : ", character.episode)
         
         self.title = character.name
         imageView.kf.setImage(with: character.image.asUrl)
@@ -38,17 +47,36 @@ class CharacterDetailViewController: UIViewController {
         genderLabel.text = character.gender
         originLabel.text = character.origin.name
         locationLabel.text = character.location.name
-        episodesLabel.text = "1,2,3,4,6,7,8,9"   //MARK: Düzenlenecektir.
-        createAtLabel.text = character.created
-        
+        episodesLabel.text = episodeIDs
+        createAtLabel.text = formatDate(character.created)
         
     }
     
     
     
-
-
-
-  
-
+    func getEpisodeIDs(from episodes: [String]) -> String? {
+        let episodeIDs = episodes.compactMap { url -> String? in
+            // URL'yi bölüp bölüm ID'sini alın
+            let components = url.split(separator: "/")
+            return String(components.last ?? "")
+        }
+        return episodeIDs.joined(separator: ",")
+    }
+    
+    
+    func formatDate(_ isoDateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = dateFormatter.date(from: isoDateString)
+        
+        dateFormatter.dateFormat = "MMM d, yyyy, h:mm a"
+        let dateString = dateFormatter.string(from: date!)
+        return dateString
+    }
+    
+    
+    
+    
+    
 }

@@ -11,7 +11,7 @@ import Foundation
 
 enum HomeEndpoint: String {
     
-    case getLocations = "/location?page=1"
+    case getLocations = "/location?page="
     case getCharacters = "/character"
     case getCharactersById = "/character/" //farkı array gelecektir yanınaç
     

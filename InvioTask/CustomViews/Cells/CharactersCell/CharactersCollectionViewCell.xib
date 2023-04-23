@@ -22,25 +22,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="330" height="120"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xdC-f9-CoH">
-                                <rect key="frame" x="140" y="10" width="150" height="100"/>
+                                <rect key="frame" x="140" y="10" width="170" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTU-r3-P5B">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="45"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="R5g-kf-dNl"/>
+                                            <constraint firstAttribute="width" constant="170" id="R5g-kf-dNl"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="22"/>
                                         <color key="textColor" name="yellow"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C3E-nt-bKy">
-                                        <rect key="frame" x="0.0" y="69" width="44" height="31"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C3E-nt-bKy">
+                                        <rect key="frame" x="0.0" y="50" width="84" height="50"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alive" translatesAutoresizingMaskIntoConstraints="NO" id="Htd-Ze-otq">
-                                                <rect key="frame" x="0.0" y="0.0" width="12" height="31"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="Htd-Ze-otq">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="50"/>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="KRk-fO-e76">
-                                                <rect key="frame" x="32" y="0.0" width="12" height="31"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dead" translatesAutoresizingMaskIntoConstraints="NO" id="KRk-fO-e76">
+                                                <rect key="frame" x="52" y="0.0" width="32" height="50"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
@@ -49,8 +49,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morty" translatesAutoresizingMaskIntoConstraints="NO" id="GaX-vG-cds">
                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="26t-bF-EbU"/>
-                                    <constraint firstAttribute="width" constant="120" id="ptG-dq-r9a"/>
+                                    <constraint firstAttribute="width" constant="120" id="gDQ-c8-RyF"/>
+                                    <constraint firstAttribute="height" constant="120" id="lHI-j1-Gnz"/>
+                                    <constraint firstAttribute="width" secondItem="GaX-vG-cds" secondAttribute="height" multiplier="1:1" id="unt-gZ-crb"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -62,7 +63,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="GaX-vG-cds" firstAttribute="leading" secondItem="LK1-Vf-DXW" secondAttribute="leading" id="3eq-HA-TBo"/>
-                            <constraint firstAttribute="width" constant="330" id="JTh-EU-j28"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="330" id="JTh-EU-j28"/>
                             <constraint firstItem="GaX-vG-cds" firstAttribute="top" secondItem="LK1-Vf-DXW" secondAttribute="top" id="KOE-9r-x1z"/>
                             <constraint firstItem="xdC-f9-CoH" firstAttribute="leading" secondItem="GaX-vG-cds" secondAttribute="trailing" constant="20" id="kz8-ib-gvY"/>
                             <constraint firstAttribute="bottom" secondItem="xdC-f9-CoH" secondAttribute="bottom" constant="10" id="lFs-ag-B5l"/>
@@ -90,8 +91,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="alive" width="12" height="12"/>
-        <image name="female" width="12" height="12"/>
+        <image name="dead" width="32" height="32"/>
+        <image name="female" width="32" height="32"/>
         <image name="morty" width="150" height="150"/>
         <namedColor name="yellow">
             <color red="0.94099998474121094" green="0.88200002908706665" blue="0.28999999165534973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
