@@ -1,7 +1,11 @@
 # Rick and Morty Characters App.
 
+![mvvm+coordinator](https://github.com/kenanbylan/rick-and-morty-app/assets/76161957/deb8ee1f-cc57-4b61-9b9d-9b13840e6687)
+
 <br>
 
+
+## App Screen
 ### It is an application created to obtain basic achievements defined by Invio Bilisim company and to learn preliminary information for internship.
 <p> 
 <img width="240" src="https://user-images.githubusercontent.com/76161957/233859450-d4e03cbc-cc20-400c-8971-2da128f2ef98.png">
