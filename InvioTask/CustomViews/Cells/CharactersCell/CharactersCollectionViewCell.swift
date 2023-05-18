@@ -3,11 +3,9 @@
 //  InvioTask
 //
 //  Created by Kenan Baylan on 10.04.2023.
-//
 
 import UIKit
 import Kingfisher
-
 
 
 enum Gender: String {
@@ -55,7 +53,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         let maskLayer = CAShapeLayer()
         let maskPath = UIBezierPath(roundedRect: characterImageView.bounds, byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
         maskLayer.path = maskPath.cgPath
-
+        
     }
     
     
@@ -68,6 +66,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         isAlive = character.status
         
         if let gender = isCharacterGender, let status = isAlive {
+            
             if gender == Gender.female.rawValue {
                 genderImageView.image = UIImage(named: "female")
                 femaleLabel.text = "female"
@@ -83,13 +82,16 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             }
             
             if status == Status.alive.rawValue {
+                
                 isAliveImageView.image = UIImage(named: "alive")
                 deadLabel.text = "alive"
                 deadLabel.textColor = .systemGreen
             } else if status == Status.dead.rawValue {
+                
                 isAliveImageView.image = UIImage(named: "dead")
                 deadLabel.text = "dead"
                 deadLabel.textColor = .red
+                
             } else {
                 isAliveImageView.image = UIImage(named: "unknown")
                 deadLabel.text = "unknown"

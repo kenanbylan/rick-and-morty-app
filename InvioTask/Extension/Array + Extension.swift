@@ -8,6 +8,7 @@
 import Foundation
 
 
+
 extension Array where Element == String {
     func characterIDs() -> [Int] {
         return compactMap { Int($0.components(separatedBy: "/").last ?? "") }

@@ -7,6 +7,7 @@ import Foundation
 
 
 protocol HomeManagerProtocol {
+    
     func getLocations(page: Int, complete: @escaping((LocationResponse?, Error?)->()))
     func getCharacters(id: String, complete: @escaping((CharacterResponse?, Error?)->()))
     func getCharactersById(characterIds: [Int], complete: @escaping(([Character]?, Error?)->()))
@@ -38,6 +39,7 @@ class HomeManager: HomeManagerProtocol {
     
     
     //MARK: Shows the characters on the screen at boot.
+    
     func getCharacters(id: String, complete: @escaping ((CharacterResponse?, Error?) -> ())) {
         NetworkService.shared.request(type: CharacterResponse.self, url: HomeEndpoint.getCharacters.path + id, method: .get) { response in
             

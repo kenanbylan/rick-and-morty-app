@@ -7,7 +7,6 @@ import UIKit
 
 class LoadingViewController: UIViewController {
     
-    
     //MARK: UIElements
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var welcomeLabel: UILabel!
@@ -69,7 +68,6 @@ class LoadingViewController: UIViewController {
             performSegue(withIdentifier: "toHomeNC", sender: nil)
         }
     }
-    
     
     
 }

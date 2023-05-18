@@ -21,9 +21,9 @@ class CharacterView: UIView {
         initialSetup()
     }
     
-    
-    
+
     private func initialSetup() {
+
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = .zero
         layer.cornerRadius = 10

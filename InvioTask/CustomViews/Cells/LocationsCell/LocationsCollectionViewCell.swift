@@ -10,10 +10,10 @@ import UIKit
 class LocationsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: LocationsCollectionViewCell.self)
+    
     @IBOutlet weak var locationLabel: UILabel!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     
     
     override func awakeFromNib() {
@@ -29,14 +29,14 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     }
     
     //This will be fixed.
+    
     func setupLocations(locations: Location) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         locationLabel.isHidden = true
         
         // Fetch necessary data here
-        
-        
+       
         locationLabel.text = locations.name
         locationLabel.isHidden = false
         activityIndicator.stopAnimating()

@@ -232,7 +232,6 @@
 		6E51BB8529EC098F00182B31 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
-				6E51BB8B29EC09D000182B31 /* ViewModel */,
 				6E51BB8A29EC09CA00182B31 /* View */,
 			);
 			path = Loading;
@@ -270,13 +269,6 @@
 				6EE1454229EA0B6C00593ED1 /* LoadingViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		6E51BB8B29EC09D000182B31 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6EE1453D29E9F53300593ED1 /* Home */ = {
