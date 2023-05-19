@@ -1,6 +1,5 @@
 # Rick and Morty Characters App.
 
-![mvvm+coordinator](https://github.com/kenanbylan/rick-and-morty-app/assets/76161957/deb8ee1f-cc57-4b61-9b9d-9b13840e6687)
 
 <br>
 
